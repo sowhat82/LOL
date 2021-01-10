@@ -1,1 +1,13 @@
-<p>home works!</p>
+<form [formGroup] = "homeForm">
+	<div class="form-group">
+		<label for="title">Search for Wines</label>
+		<input formControlName = "search" id="title" class="form-control" type="text" placeholder="Search for Wines">
+	</div>
+
+	<div class="d-flex justify-content-end align-items-center mt-4">
+		<button [disabled] = "homeForm.invalid" class="btn btn-lg btn-success" (click) = "search()">
+			<span style="margin-right: 5px !important;">Search</span>
+			<i class="fas fa-door-open"></i>
+		</button>
+	</div>
+</form>

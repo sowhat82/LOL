@@ -1,0 +1,20 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{result.aggregate?.wine.Name}} {{result.aggregate?.wine.Varietal}}</h5>
+      <div class="card-title" *ngIf="emptyWineName"> No results found </div>
+
+      <h6 class="card-subtitle mb-2 text-muted">Country: {{result.aggregate?.wine.Country}}</h6>
+      
+      <br>
+      <h6>
+          Description:
+      </h6>
+      <p class="card-text">{{result.agg_summary?.textReviews.mouth}}</p>
+      
+      <!-- Reviewer's Twitter Handle
+      <a href="https://twitter.com/{{wineDetails[0]?.taster_twitter_handle}}" target = "_blank" class="card-link"> {{wineDetails[0]?.taster_twitter_handle}}</a> -->
+    </div>
+  </div>
+<br>
+<button type="button" class="btn btn-primary mx-2" [routerLink] = "['/searchResults']">Back</button>
+<button type="button" class="btn btn-primary mx-2" [routerLink] = "['/']">Home</button>

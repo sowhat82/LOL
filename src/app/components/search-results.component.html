@@ -1,0 +1,28 @@
+<h2>Search results for {{wineName}}</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Country</th>
+      <th scope="col">Vintage</th>
+      <th scope="col">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let r of result.items">
+        <a (click) = "getWineDetails(r.id)" class="list-group-item list-group-item-action list-group-item-primary">      
+            <td>{{r.Name}} {{r.Varietal}}</td>
+        </a>
+        <td>{{r.Country}}</td>
+        <td>{{r.vintage}}</td>
+        <td>{{r.Type}}</td>
+    </tr>
+  </tbody>
+</table>
+
+      <button (click) = prevPage() *ngIf = "notstartofpage" type="submit" class = "btn btn-primary mx-2 float-right">Previous</button>  
+      <button (click) = nextPage() *ngIf = "notendofpage" type="submit" class = "btn btn-primary mx-2 float-right">Next</button>
+  
+  <hr>
+      <button type="button" class="btn btn-primary mx-2 ml-auto" [routerLink] = "['/main']">Back</button>
+

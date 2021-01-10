@@ -46,7 +46,9 @@ export class AuthService {
         const headers = new HttpHeaders()
         .set('Authorization', this.token.token_type+this.token.access_token)
 
-        await this.http.get<any>('/customer', {headers: headers}).toPromise() 
+        const result = await this.http.get<any>('/protected/secret', {headers: headers}).toPromise() 
+
+        console.info(result)
     }
 
 }

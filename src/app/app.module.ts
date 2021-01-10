@@ -7,10 +7,15 @@ import { HomeComponent } from './components/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthService } from './auth.service';
+import { SearchResultsComponent } from './components/search-results.component';
+import { HttpService } from './http.service';
+import { WineDetailsComponent } from './components/wine-details.component';
 
 const ROUTES: Routes = [
 	{ path: '', component: LoginComponent },
 	{ path: 'main', component: HomeComponent },
+	{ path: 'searchResults', component: SearchResultsComponent },
+	{ path: 'wineDetails', component: WineDetailsComponent },
 	{ path: '**', redirectTo: '/', pathMatch: 'full' }
 ]
 
@@ -18,12 +23,14 @@ const ROUTES: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    SearchResultsComponent,
+    WineDetailsComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(ROUTES), FormsModule, ReactiveFormsModule, HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
