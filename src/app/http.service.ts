@@ -1,14 +1,16 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { AuthService } from "./auth.service";
 
 @Injectable()
 
 export class HttpService {
 
     wineName = ""
+    wineVarietal = ""
     wineID = ""
-
-    constructor (private http: HttpClient){}
+    favourites = []
+    constructor (private http: HttpClient, private auth: AuthService){}
 
     async searchWines(wineName, OFFSET, LIMIT){
 
@@ -27,7 +29,35 @@ export class HttpService {
     async getWineDetails(wineID) {
         const results = await this.http.get<any>('/getWineDetails/'+wineID).toPromise()
         return results
+    }
 
+    async saveWine(userName, wineID, wineName, digitalOceanKey){
+        const params = new HttpParams()
+        .set('userName', userName)
+        .set('wineID', wineID)
+        .set('wineName', wineName)
+        .set('digitalOceanKey', digitalOceanKey)
+    
+        const httpHeaders = new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+    //    .set('Access-Control-Allow-Origin', 'http://localhost:4200');
+    
+        await this.http.post('/saveWine', params.toString(), {headers: httpHeaders}).toPromise().then(
+          function() {
+            // success callback
+          },
+          function(response) {
+            // failure callback,handle error here
+    
+            window.alert(response.error.message)
+          })
+    
+    }
+
+    async getFavourites(userName){
+      this.favourites = await this.http.get<any>('/favourites/'+userName).toPromise() 
+      console.info(this.favourites)
+      return (this.favourites)
     }
 
 }

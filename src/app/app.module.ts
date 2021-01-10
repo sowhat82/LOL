@@ -10,12 +10,14 @@ import { AuthService } from './auth.service';
 import { SearchResultsComponent } from './components/search-results.component';
 import { HttpService } from './http.service';
 import { WineDetailsComponent } from './components/wine-details.component';
+import { FavouriteWinesComponent } from './components/favourite-wines.component';
 
 const ROUTES: Routes = [
 	{ path: '', component: LoginComponent },
-	{ path: 'main', component: HomeComponent },
+	{ path: 'home', component: HomeComponent },
 	{ path: 'searchResults', component: SearchResultsComponent },
 	{ path: 'wineDetails', component: WineDetailsComponent },
+	{ path: 'favouriteWines', component: FavouriteWinesComponent },
 	{ path: '**', redirectTo: '/', pathMatch: 'full' }
 ]
 
@@ -25,7 +27,8 @@ const ROUTES: Routes = [
     LoginComponent,
     HomeComponent,
     SearchResultsComponent,
-    WineDetailsComponent
+    WineDetailsComponent,
+    FavouriteWinesComponent
   ],
   imports: [
     BrowserModule, RouterModule.forRoot(ROUTES), FormsModule, ReactiveFormsModule, HttpClientModule

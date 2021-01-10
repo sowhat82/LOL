@@ -22,7 +22,11 @@ export class HomeComponent implements OnInit {
   }
 
   async search(){
-    this.auth.verifyToken()
+    if (await this.auth.verifyToken() != 200){
+      window.alert ('Log in expired')
+      this.router.navigate(['/login'])
+      return
+    }
     this.httpSvc.wineName = this.homeForm.get('search').value
     this.router.navigate(['/searchResults'])
   }

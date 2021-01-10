@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { HttpService } from '../http.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class SearchResultsComponent implements OnInit {
   notendofpage =  true
 
 
-  constructor(private httpSvc: HttpService, private router: Router) { }
+  constructor(private httpSvc: HttpService, private router: Router, private auth: AuthService) { }
 
   async ngOnInit(): Promise<void> {
     this.wineName = this.httpSvc.wineName
@@ -28,7 +29,13 @@ export class SearchResultsComponent implements OnInit {
     this.notendofpage = !(this.result.items.length < 10)
   }
 
-  getWineDetails(wineID){
+  async getWineDetails(wineID){
+
+    if (await this.auth.verifyToken() != 200){
+      window.alert ('Log in expired')
+      this.router.navigate(['/login'])
+      return
+    }
 
     //store wineID in the wine service
     this.httpSvc.wineID = wineID
@@ -52,3 +59,5 @@ export class SearchResultsComponent implements OnInit {
     this.notstartofpage = !(this.OFFSET==0)
     this.notendofpage = !(this.result.items.length < 10)  }
 }
+
+going back to the search results component yields different search results

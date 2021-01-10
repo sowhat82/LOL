@@ -10,11 +10,17 @@
           Description:
       </h6>
       <p class="card-text">{{result.agg_summary?.textReviews.mouth}}</p>
-      
+
+      <button type="button" class="btn btn-secondary mx-2" (click) = "addToFavourites()">Add to favourites</button>
+      <br><br>
+      Optional Image Upload
+      <div>
+          <input accept="image/*" type="file" name ="imageFile" (change)="onFileSelect($event)" />
+      </div>
       <!-- Reviewer's Twitter Handle
       <a href="https://twitter.com/{{wineDetails[0]?.taster_twitter_handle}}" target = "_blank" class="card-link"> {{wineDetails[0]?.taster_twitter_handle}}</a> -->
     </div>
   </div>
 <br>
 <button type="button" class="btn btn-primary mx-2" [routerLink] = "['/searchResults']">Back</button>
-<button type="button" class="btn btn-primary mx-2" [routerLink] = "['/']">Home</button>
+<button type="button" class="btn btn-primary mx-2" [routerLink] = "['/home']">Home</button>

@@ -6,6 +6,7 @@ import { Injectable } from "@angular/core";
 export class AuthService {
 
     token: any
+    userName = ""
 
     constructor(private http: HttpClient){}
 
@@ -39,16 +40,19 @@ export class AuthService {
             }
         })
         console.info(success)
+        this.userName = username
         return (success)
     }
 
     async verifyToken(){        
+
+      console.info(this.token)
         const headers = new HttpHeaders()
-        .set('Authorization', this.token.token_type+this.token.access_token)
+        .set('Authorization', `Bearer ${this.token.token}`)
 
         const result = await this.http.get<any>('/protected/secret', {headers: headers}).toPromise() 
 
-        console.info(result)
+        return (result.status)
     }
 
 }

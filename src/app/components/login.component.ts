@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   async login(){
 
     if (await this.auth.login(this.loginForm.get('username').value, this.loginForm.get('password').value)){
-      this.router.navigate(['/main'])
+      this.router.navigate(['/home'])
     }
 
 

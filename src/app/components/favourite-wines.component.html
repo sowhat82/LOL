@@ -1,0 +1,15 @@
+<h2>Favourite wines for {{userName}}</h2>
+<hr>
+<div *ngFor = "let f of favouriteWines">
+    <div class="row">
+        <div class="col-4 d-flex justify-content-center">
+            <img *ngIf = "f.digitalOceanKey !== 'undefined'" src="https://day25todo.fra1.digitaloceanspaces.com/{{f.digitalOceanKey}}" class="img-thumbnail img-fluid" width="50%">
+        </div>
+        <div class="col-8">
+            <h3>{{ f.wineName }}</h3>    
+        </div>
+    </div>
+    <hr>
+</div>
+
+<button type="button" class="btn btn-primary mx-2" [routerLink] = "['/home']">Home</button>
