@@ -12,6 +12,7 @@ export class FavouriteWinesComponent implements OnInit {
 
   userName = ""
   favouriteWines: any
+  countryCount: any
 
   constructor(private auth: AuthService, private httpSvc: HttpService) { }
 
@@ -21,7 +22,9 @@ export class FavouriteWinesComponent implements OnInit {
 
     this.favouriteWines = await this.httpSvc.getFavourites(this.userName)
 
-    console.info('fav wintes ', this.favouriteWines)
+    this.countryCount = await this.httpSvc.getCountryCount(this.userName)
+
+    console.info('cointry count ', this.countryCount)
   }
 
 }

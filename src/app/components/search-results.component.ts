@@ -10,6 +10,7 @@ import { HttpService } from '../http.service';
 })
 export class SearchResultsComponent implements OnInit {
 
+  searchField = ""
   wineName = ""
   result: any = {}
   OFFSET = 0
@@ -21,8 +22,10 @@ export class SearchResultsComponent implements OnInit {
   constructor(private httpSvc: HttpService, private router: Router, private auth: AuthService) { }
 
   async ngOnInit(): Promise<void> {
+
+    this.searchField = this.httpSvc.searchField
     this.wineName = this.httpSvc.wineName
-    this.result = await this.httpSvc.searchWines(this.httpSvc.wineName, this.OFFSET, this.LIMIT)
+    this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.OFFSET, this.LIMIT)
 
     // to show/hide buttons
     this.notstartofpage = !(this.OFFSET==0)
@@ -59,5 +62,3 @@ export class SearchResultsComponent implements OnInit {
     this.notstartofpage = !(this.OFFSET==0)
     this.notendofpage = !(this.result.items.length < 10)  }
 }
-
-going back to the search results component yields different search results

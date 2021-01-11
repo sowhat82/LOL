@@ -12,6 +12,7 @@ import { HttpService } from '../http.service';
 export class HomeComponent implements OnInit {
   
   homeForm: FormGroup
+  file = ""
 
   constructor(private fb: FormBuilder, private router: Router, private httpSvc: HttpService, private auth: AuthService) { }
 
@@ -27,7 +28,18 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/login'])
       return
     }
-    this.httpSvc.wineName = this.homeForm.get('search').value
+    this.httpSvc.searchField = this.homeForm.get('search').value
     this.router.navigate(['/searchResults'])
   }
+
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      this.file = event.target.files[0];
+    }
+
+    console.info(this.file)
+
+
+  }
+
 }

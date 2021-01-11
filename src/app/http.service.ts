@@ -6,19 +6,21 @@ import { AuthService } from "./auth.service";
 
 export class HttpService {
 
+    searchField = ""
     wineName = ""
     wineVarietal = ""
     wineID = ""
+    country=""
     favourites = []
     constructor (private http: HttpClient, private auth: AuthService){}
 
-    async searchWines(wineName, OFFSET, LIMIT){
+    async searchWines(searchField, OFFSET, LIMIT){
 
-        console.info(wineName)
-        wineName = this.wineName
+        // console.info(wineName)
+        // wineName = this.wineName
 
         const params = new HttpParams()
-        .set('wineName', wineName)
+        .set('wineName', searchField)
         .set('offset', OFFSET)
         .set('limit', LIMIT)
 
@@ -31,11 +33,12 @@ export class HttpService {
         return results
     }
 
-    async saveWine(userName, wineID, wineName, digitalOceanKey){
+    async saveWine(userName, wineID, wineName, digitalOceanKey, country){
         const params = new HttpParams()
         .set('userName', userName)
         .set('wineID', wineID)
         .set('wineName', wineName)
+        .set('country', country)
         .set('digitalOceanKey', digitalOceanKey)
     
         const httpHeaders = new HttpHeaders()
@@ -58,6 +61,12 @@ export class HttpService {
       this.favourites = await this.http.get<any>('/favourites/'+userName).toPromise() 
       console.info(this.favourites)
       return (this.favourites)
+    }
+
+    async getCountryCount(userName){
+      const countryCount = await this.http.get<any>('/countryCount/'+userName).toPromise() 
+      console.info(countryCount)
+      return (countryCount)
     }
 
 }

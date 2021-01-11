@@ -28,6 +28,7 @@ export class WineDetailsComponent implements OnInit {
     console.info(this.result)
     this.httpSvc.wineName = this.result.aggregate.wine.Name
     this.httpSvc.wineVarietal = this.result.aggregate.wine.Varietal
+    this.httpSvc.country = this.result.aggregate.wine.Country
 
     this.emptyWineName = Object.keys(this.result).length === 0
     this.emptyCountry = Object.keys(this.result).length === 0
@@ -45,6 +46,7 @@ export class WineDetailsComponent implements OnInit {
       const params = new HttpParams()
 			.set('userName', this.auth.userName)
 			.set('wineID', this.httpSvc.wineID)
+			.set('country', this.httpSvc.country)
 			.set('wineName', this.httpSvc.wineName + " " + this.httpSvc.wineVarietal)
 
       await this.http.post<any>('/saveWine', formData, {params: params}).toPromise()  
