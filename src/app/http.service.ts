@@ -33,29 +33,29 @@ export class HttpService {
         return results
     }
 
-    async saveWine(userName, wineID, wineName, digitalOceanKey, country){
-        const params = new HttpParams()
-        .set('userName', userName)
-        .set('wineID', wineID)
-        .set('wineName', wineName)
-        .set('country', country)
-        .set('digitalOceanKey', digitalOceanKey)
+    // async saveWine(userName, wineID, wineName, digitalOceanKey, country){
+    //     const params = new HttpParams()
+    //     .set('userName', userName)
+    //     .set('wineID', wineID)
+    //     .set('wineName', wineName)
+    //     .set('country', country)
+    //     .set('digitalOceanKey', digitalOceanKey)
     
-        const httpHeaders = new HttpHeaders()
-        .set('Content-Type', 'application/x-www-form-urlencoded')
-    //    .set('Access-Control-Allow-Origin', 'http://localhost:4200');
+    //     const httpHeaders = new HttpHeaders()
+    //     .set('Content-Type', 'application/x-www-form-urlencoded')
+    // //    .set('Access-Control-Allow-Origin', 'http://localhost:4200');
     
-        await this.http.post('/saveWine', params.toString(), {headers: httpHeaders}).toPromise().then(
-          function() {
-            // success callback
-          },
-          function(response) {
-            // failure callback,handle error here
+    //     await this.http.post('/saveWine', params.toString(), {headers: httpHeaders}).toPromise().then(
+    //       function() {
+    //         // success callback
+    //       },
+    //       function(response) {
+    //         // failure callback,handle error here
     
-            window.alert(response.error.message)
-          })
+    //         window.alert(response.error.message)
+    //       })
     
-    }
+    // }
 
     async getFavourites(userName){
       this.favourites = await this.http.get<any>('/favourites/'+userName).toPromise() 
@@ -67,6 +67,25 @@ export class HttpService {
       const countryCount = await this.http.get<any>('/countryCount/'+userName).toPromise() 
       console.info(countryCount)
       return (countryCount)
+    }
+
+    async deleteSavedWine(ID){
+        const params = new HttpParams()
+        .set('ID', ID)
+    
+        const httpHeaders = new HttpHeaders()
+        .set('Content-Type', 'application/x-www-form-urlencoded')
+        console.info(params)
+        await this.http.post('/deleteSavedWine', params.toString(), {headers: httpHeaders}).toPromise().then(
+          function() {
+            // success callback
+          },
+          function(response) {
+            // failure callback,handle error here
+    
+            window.alert(response.error.message)
+          })
+    
     }
 
 }

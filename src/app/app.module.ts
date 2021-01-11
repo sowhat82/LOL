@@ -31,7 +31,9 @@ const ROUTES: Routes = [
     FavouriteWinesComponent
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(ROUTES), FormsModule, ReactiveFormsModule, HttpClientModule
+    BrowserModule.withServerTransition({ appId: 'serverApp' }), RouterModule.forRoot(ROUTES, {
+    initialNavigation: 'enabled'
+}), FormsModule, ReactiveFormsModule, HttpClientModule
   ],
   providers: [AuthService, HttpService],
   bootstrap: [AppComponent]

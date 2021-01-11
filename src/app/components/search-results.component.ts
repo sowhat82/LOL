@@ -49,7 +49,7 @@ export class SearchResultsComponent implements OnInit {
 
   async nextPage(){
     this.OFFSET += this.LIMIT
-    this.result = await this.httpSvc.searchWines(this.httpSvc.wineName, this.OFFSET, this.LIMIT)
+    this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.OFFSET, this.LIMIT)
 
     this.notstartofpage = !(this.OFFSET==0)
     this.notendofpage = !(this.result.items.length < 10)
@@ -57,7 +57,7 @@ export class SearchResultsComponent implements OnInit {
 
   async prevPage(){
     this.OFFSET -= this.LIMIT
-    this.result = await this.httpSvc.searchWines(this.httpSvc.wineName, this.OFFSET, this.LIMIT)
+    this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.OFFSET, this.LIMIT)
 
     this.notstartofpage = !(this.OFFSET==0)
     this.notendofpage = !(this.result.items.length < 10)  }

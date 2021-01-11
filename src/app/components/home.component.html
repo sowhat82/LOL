@@ -1,3 +1,5 @@
+<h2>Welcome {{userName}}!</h2>
+
 <div class="d-flex justify-content-end align-items-center mt-4">
 	<button class="btn btn-lg btn-primary" [routerLink] = "['/favouriteWines']">
 		<span style="margin-right: 5px !important;">My Favourite Wines</span>
@@ -13,17 +15,30 @@
 	</div>
 
 	<div class="d-flex justify-content-end align-items-center mt-4">
-		<button [disabled] = "homeForm.invalid" class="btn btn-lg btn-success" (click) = "search()">
+		<button [disabled] = "homeForm.invalid" class="btn btn-lg btn-success" (click) = "search(true)">
 			<span style="margin-right: 5px !important;">Search</span>
 			<i class="fas fa-door-open"></i>
 		</button>
 	</div>
 </form>
+<br>
+	<!-- <div>
+		Search using an image =>
+		<input accept="image/*" class="form_control" type="file" name ="imageFile" (change)="onFileSelect($event)"/>
+	</div> -->
+
+	<div>
+		<label for="formFileLg" class="form-label">Search by Image</label>
+		<input class="form-control form-control" id="formFileLg" type="file" name="imageFile" (change)="onFileSelect($event)">
+	</div>
 
 <div class="d-flex justify-content-end align-items-center mt-4">
-	<div>
-		Search using an image =>
-		<input accept="image/*" class="form_control" type="file" name ="imageFile" (change)="onFileSelect($event)" />
+	<div class="d-flex justify-content-end align-items-center mt-4">
+		<button [disabled] = "file == ''" class="btn btn-lg btn-success" (click) = "uploadImage()">
+			<span style="margin-right: 5px !important;">Upload</span>
+			<i class="fas fa-door-open"></i>
+		</button>
 	</div>
+
 </div>
 

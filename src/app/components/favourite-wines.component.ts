@@ -24,7 +24,15 @@ export class FavouriteWinesComponent implements OnInit {
 
     this.countryCount = await this.httpSvc.getCountryCount(this.userName)
 
-    console.info('cointry count ', this.countryCount)
   }
 
+  async deleteSavedWine(ID){
+    console.info(ID)
+    await this.httpSvc.deleteSavedWine(ID)
+
+    this.favouriteWines = await this.httpSvc.getFavourites(this.userName)
+
+    this.countryCount = await this.httpSvc.getCountryCount(this.userName)
+
+  }
 }
