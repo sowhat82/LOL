@@ -11,6 +11,8 @@ import { SearchResultsComponent } from './components/search-results.component';
 import { HttpService } from './http.service';
 import { WineDetailsComponent } from './components/wine-details.component';
 import { FavouriteWinesComponent } from './components/favourite-wines.component';
+import { ChatComponent } from './components/chat.component';
+import { ChatService } from './chat.service';
 
 const ROUTES: Routes = [
 	{ path: '', component: LoginComponent },
@@ -18,6 +20,7 @@ const ROUTES: Routes = [
 	{ path: 'searchResults', component: SearchResultsComponent },
 	{ path: 'wineDetails', component: WineDetailsComponent },
 	{ path: 'favouriteWines', component: FavouriteWinesComponent },
+	{ path: 'chat', component: ChatComponent },
 	{ path: '**', redirectTo: '/', pathMatch: 'full' }
 ]
 
@@ -28,14 +31,15 @@ const ROUTES: Routes = [
     HomeComponent,
     SearchResultsComponent,
     WineDetailsComponent,
-    FavouriteWinesComponent
+    FavouriteWinesComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }), RouterModule.forRoot(ROUTES, {
     initialNavigation: 'enabled'
 }), FormsModule, ReactiveFormsModule, HttpClientModule
   ],
-  providers: [AuthService, HttpService],
+  providers: [AuthService, HttpService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

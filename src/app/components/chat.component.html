@@ -1,0 +1,36 @@
+<h2>Private Messaging System (PMS)</h2>
+
+<button type="button" class="btn btn-primary mx-2 ml-auto" [routerLink] = "['/home']">Back</button>
+
+<form [formGroup] = "chatForm">
+  
+	<div class="d-flex justify-content-end align-items-center mt-4">
+		<button type="button" class="btn btn-lg btn-success" (click) = "conn()">
+			<span style="margin-right: 5px !important;" *ngIf = "!connected">Connect</span>
+			<span style="margin-right: 5px !important;" *ngIf = "connected">Disconnect</span>
+			<i class="fas fa-door-open"></i>
+		</button>
+	</div>
+
+  <div class="form-group">
+		<label for="password">Message</label>
+		<input formControlName = "message" type="message" id="message" class="form-control" placeholder="Message">
+	</div>
+
+	<div class="d-flex justify-content-end align-items-center mt-4">
+		<button type = "submit" [disabled] = "chatForm.get('message').value == '' || !connected" class="btn btn-lg btn-success" (click) = "send()">
+			<span style="margin-right: 5px !important;">Send</span>
+			<i class="fas fa-door-open"></i>
+		</button>
+	</div>
+</form>
+
+<H3>	
+	<label for="messages">Messages</label>
+</H3>
+<div *ngFor = "let m of messages">
+    <h5>
+        <code>{{m.from}} </code>
+        <span>{{m.message}}</span>    
+    </h5>
+</div>

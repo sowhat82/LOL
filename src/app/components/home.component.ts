@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   file = ""
   digitalOceanKey = ""
   userName = ""
+  uploadComplete = false
 
   constructor(private fb: FormBuilder, private router: Router, private httpSvc: HttpService, private auth: AuthService, private http: HttpClient) { }
 
@@ -54,23 +55,28 @@ export class HomeComponent implements OnInit {
 
     this.digitalOceanKey = await this.http.post<any>('/uploadPictureRecognition', formData).toPromise()  
 
+    this.uploadComplete = true
   }
 
   async uploadImage(){
-
-    const result = await this.http.get<any>('/pictureRecognition/'+this.digitalOceanKey).toPromise()
-
-    const resultArray = (result.result.images[0].classifiers[0].classes)
     var searchText = ""
-    console.info(resultArray)
-    
-    for (let i = 0; i < resultArray.length; i++){
-      searchText = searchText + resultArray[i].class + " "
-    }
-    searchText = searchText.trim()
-    console.info(searchText)
+
+    // google image recognition
+      const result2 = await this.http.get<any>('/GooglePictureRecognition/'+this.digitalOceanKey).toPromise()
+      console.info(result2)
+      searchText = await (result2?.description.replace(/[\W_]+/g," ").replace(/\r?\n|\r/," "))
+
+    // OR IBM image recognition
+      // const result = await this.http.get<any>('/IbmPictureRecognition/'+this.digitalOceanKey).toPromise()
+      // const resultArray = (result.result.images[0].classifiers[0].classes)
+      // for (let i = 0; i < resultArray.length; i++){
+      //   searchText = searchText + resultArray[i].class + " "
+      // }
+      // searchText = searchText.trim()
+
     this.httpSvc.searchField = searchText
     this.homeForm.reset()
+    this.uploadComplete = false
     this.search(false)
   }
 }
