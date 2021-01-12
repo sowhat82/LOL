@@ -74,5 +74,3 @@ export class HomeComponent implements OnInit {
     this.search(false)
   }
 }
-
-upload alvin favourite wine and find labels

@@ -12,7 +12,7 @@ export class FavouriteWinesComponent implements OnInit {
 
   userName = ""
   favouriteWines: any
-  countryCount: any
+  countryCount: any = []
 
   constructor(private auth: AuthService, private httpSvc: HttpService) { }
 
