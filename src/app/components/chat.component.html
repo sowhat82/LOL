@@ -1,6 +1,7 @@
 <h2>Private Messaging System (PMS)</h2>
+<h3>You are logged in as {{userName}}</h3>
 
-<button type="button" class="btn btn-primary mx-2 ml-auto" [routerLink] = "['/home']">Back</button>
+<button type="button" class="btn btn-primary mx-2 ml-auto" (click) = "back()">Back</button>
 
 <form [formGroup] = "chatForm">
   

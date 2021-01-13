@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { ChatMessage, ChatService } from '../chat.service';
@@ -15,15 +16,18 @@ export class ChatComponent implements OnInit {
   chatForm : FormGroup
   messages: ChatMessage[] = []
   event$: Subscription
+  userName = ""
 
 
-  constructor(private fb: FormBuilder, private chatSvc: ChatService, private auth: AuthService) { }
+  constructor(private fb: FormBuilder, private chatSvc: ChatService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
 
     this.chatForm = this.fb.group({
       message: this.fb.control('', [Validators.required]),
     })    
+
+    this.userName = this.auth.userName
 
     this.conn()
   }
@@ -60,6 +64,18 @@ export class ChatComponent implements OnInit {
     const message = this.chatForm.get('message').value
     this.chatForm.get('message').reset()
     this.chatSvc.send(message)
+  }
+
+  async back(){
+    
+    if (this.connected){
+      this.chatSvc.leave()
+      await this.chatSvc.delay(1000)
+      this.event$.unsubscribe()
+      this.event$ = null
+    }
+
+    this.router.navigate(['/home'])
   }
 
 }

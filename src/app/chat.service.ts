@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import {HttpParams} from "@angular/common/http";
 import { Subject } from "rxjs";
+import { environment } from "src/environments/environment";
 
 export interface ChatMessage {
     from: string
@@ -33,7 +34,8 @@ export class ChatService{
         const host = window.location.host;
         // websocket instantiation
         // this.sock = new WebSocket(`${protocol}//${host}/chat?${params.toString()}`);
-        this.sock = new WebSocket(`ws://localhost:3000/chat?${params.toString()}`)
+        // this.sock = new WebSocket(`ws://localhost:3000/chat?${params.toString()}`)
+        this.sock = new WebSocket(`${environment.baseUrl}/chat?${params.toString()}`)
 
         this.sock.onmessage = (payload: MessageEvent) => {
             const chat = JSON.parse(payload.data) as ChatMessage

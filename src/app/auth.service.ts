@@ -22,12 +22,11 @@ export class AuthService {
         .set('Content-Type', 'application/x-www-form-urlencoded');
         
         await this.http.post('/login', loginDetails.toString(),
-        { headers: httpHeaders })
+        { headers: httpHeaders, observe: 'response'})
         .toPromise()
         .then(
           (token) => {
-            console.info(token)
-            this.token = token
+            this.token = token.body
             // window.alert("success ")
             success = true
           }
@@ -46,13 +45,26 @@ export class AuthService {
 
     async verifyToken(){        
 
-      console.info(this.token)
-        const headers = new HttpHeaders()
-        .set('Authorization', `Bearer ${this.token.token}`)
+      var status = 0
 
-        const result = await this.http.get<any>('/protected/secret', {headers: headers}).toPromise() 
+      const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.token.token}`)
 
-        return (result.status)
+      await this.http.get<any>('/protected/secret', {headers: headers, observe: 'response'}).toPromise().then(
+        function(result) {
+          // success callback
+          status = result.status
+        },
+        function(result) {
+          // failure callback,handle error here
+          // response.data.message will be "This is an error!"
+          status = result.status
+          // window.alert("Log in expired " + status.toString())
+        }
+        )
+
+      return (status)
+
     }
 
 }

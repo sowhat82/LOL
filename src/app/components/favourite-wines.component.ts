@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { count } from 'rxjs-compat/operator/count';
 import { AuthService } from '../auth.service';
 import { HttpService } from '../http.service';
 
@@ -23,7 +24,6 @@ export class FavouriteWinesComponent implements OnInit {
     this.favouriteWines = await this.httpSvc.getFavourites(this.userName)
 
     this.countryCount = await this.httpSvc.getCountryCount(this.userName)
-
   }
 
   async deleteSavedWine(ID){
