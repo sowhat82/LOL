@@ -59,7 +59,6 @@ export class AuthService {
           // failure callback,handle error here
           // response.data.message will be "This is an error!"
           status = result.status
-          // window.alert("Log in expired " + status.toString())
         }
         )
 

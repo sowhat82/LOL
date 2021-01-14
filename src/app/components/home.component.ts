@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   file = ""
   digitalOceanKey = ""
   userName = ""
-  uploadComplete = false
 
   constructor(private fb: FormBuilder, private router: Router, private httpSvc: HttpService, private auth: AuthService, private http: HttpClient) { }
 
@@ -49,48 +48,44 @@ export class HomeComponent implements OnInit {
       this.file = event.target.files[0];
     }
 
-    console.info(this.file)
+  }
+
+  async uploadImage(){
+    var searchText = ""
 
     const formData = new FormData();
 
     formData.set('name', 'temp pic for recognition');
     formData.set('image-file', this.file);
 
-    // const params = new HttpParams()
-    // .set('userName', this.auth.userName)
+    const result = await this.http.post<any>('/uploadPictureRecognition', formData).toPromise()  
 
-    this.digitalOceanKey = await this.http.post<any>('/uploadPictureRecognition', formData).toPromise()  
-
-    this.uploadComplete = true
-  }
-
-  async uploadImage(){
-    var searchText = ""
 
     // google image recognition
-      const result2 = await this.http.get<any>('/GooglePictureRecognition/'+this.digitalOceanKey).toPromise()
-      console.info(result2)
-      searchText = await (result2?.description.replace(/[\W_]+/g," ").replace(/\r?\n|\r/," "))
-      console.info(searchText)
-
-    // OR IBM image recognition if google image fails
-    if (searchText == undefined){
-      searchText = ""
-      const result = await this.http.get<any>('/IbmPictureRecognition/'+this.digitalOceanKey).toPromise()
-      const resultArray = (result.result.images[0].classifiers[0].classes)
-      for (let i = 0; i < resultArray.length; i++){
-        searchText = searchText + resultArray[i].class + " "
-      }
+      // const result2 = await this.http.get<any>('/GooglePictureRecognition/'+this.digitalOceanKey).toPromise()
+      searchText = await (result?.description.replace(/[\W_]+/g," ").replace(/\r?\n|\r/," "))
       searchText = searchText.trim()
-    }
+      console.info(searchText)
+      this.httpSvc.searchField = searchText
+      
+    // OR IBM image recognition if google image fails
+    // if (searchText == undefined){
+    //   searchText = ""
+    //   const result = await this.http.get<any>('/IbmPictureRecognition/'+this.digitalOceanKey).toPromise()
+    //   const resultArray = (result.result.images[0].classifiers[0].classes)
+    //   for (let i = 0; i < resultArray.length; i++){
+    //     searchText = searchText + resultArray[i].class + " "
+    //   }
+    //   searchText = searchText.trim()
+    // }
 
-    var uniqueSearchText=searchText.split(' ').filter(function(item,i,allItems){
-      return i==allItems.indexOf(item);
-    }).join(' ');
+    // var uniqueSearchText=searchText.split(' ').filter(function(item,i,allItems){
+    //   return i==allItems.indexOf(item);
+    // }).join(' ');
 
-    this.httpSvc.searchField = uniqueSearchText
+    // this.httpSvc.searchField = uniqueSearchText
+
     this.homeForm.reset()
-    this.uploadComplete = false
     this.search(false)
   }
 }
