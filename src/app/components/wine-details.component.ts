@@ -26,9 +26,9 @@ export class WineDetailsComponent implements OnInit {
 
     this.result = await this.httpSvc.getWineDetails(this.httpSvc.wineID)
     console.info(this.result)
-    this.httpSvc.wineName = this.result.aggregate.wine.Name
-    this.httpSvc.wineVarietal = this.result.aggregate.wine.Varietal
-    this.httpSvc.country = this.result.aggregate.wine.Country
+    this.httpSvc.wineName = this.result.aggregate?.wine.Name
+    this.httpSvc.wineVarietal = this.result.aggregate?.wine.Varietal
+    this.httpSvc.country = this.result.aggregate?.wine.Country
 
     this.emptyWineName = Object.keys(this.result).length === 0
     this.emptyCountry = Object.keys(this.result).length === 0

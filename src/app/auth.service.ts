@@ -47,6 +47,8 @@ export class AuthService {
 
       var status = 0
 
+      console.info('token ' ,this.token.token)
+
       const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.token.token}`)
 
