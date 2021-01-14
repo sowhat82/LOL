@@ -34,7 +34,7 @@ export class SearchResultsComponent implements OnInit {
 
   async getWineDetails(wineID){
 
-    if (await this.auth.verifyToken()){
+    if (await this.auth.verifyToken() != 200){
       window.alert ('Log in expired')
       this.router.navigate(['/login'])
       return

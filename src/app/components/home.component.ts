@@ -72,7 +72,8 @@ export class HomeComponent implements OnInit {
       console.info(result2)
       searchText = await (result2?.description.replace(/[\W_]+/g," ").replace(/\r?\n|\r/," "))
       console.info(searchText)
-    // OR IBM image recognition
+
+    // OR IBM image recognition if google image fails
     if (searchText == undefined){
       searchText = ""
       const result = await this.http.get<any>('/IbmPictureRecognition/'+this.digitalOceanKey).toPromise()
@@ -83,7 +84,11 @@ export class HomeComponent implements OnInit {
       searchText = searchText.trim()
     }
 
-    this.httpSvc.searchField = searchText
+    var uniqueSearchText=searchText.split(' ').filter(function(item,i,allItems){
+      return i==allItems.indexOf(item);
+    }).join(' ');
+
+    this.httpSvc.searchField = uniqueSearchText
     this.homeForm.reset()
     this.uploadComplete = false
     this.search(false)
