@@ -60,14 +60,32 @@ export class HomeComponent implements OnInit {
 
     const result = await this.http.post<any>('/uploadPictureRecognition', formData).toPromise()  
 
-
-    // google image recognition
-      // const result2 = await this.http.get<any>('/GooglePictureRecognition/'+this.digitalOceanKey).toPromise()
-      searchText = await (result?.description.replace(/[\W_]+/g," ").replace(/\r?\n|\r/," "))
+    if (result.type == 'google'){
+      // google image recognition handling
+      searchText = await (result?.response.description.replace(/[\W_]+/g," ").replace(/\r?\n|\r/," "))
       searchText = searchText.trim()
       console.info(searchText)
       this.httpSvc.searchField = searchText
-      
+    }
+    else{
+      // IBM result handling
+      const resultArray = (result.response.result.images[0].classifiers[0].classes)
+      for (let i = 0; i < resultArray.length; i++){
+        searchText = searchText + resultArray[i].class + " "
+      }
+      searchText = searchText.trim()
+    
+      // remove duplicate words
+      var uniqueSearchText=searchText.split(' ').filter(function(item,i,allItems){
+        return i==allItems.indexOf(item);
+      }).join(' ');
+
+      this.httpSvc.searchField = uniqueSearchText
+    }
+
+
+    
+
     // OR IBM image recognition if google image fails
     // if (searchText == undefined){
     //   searchText = ""
