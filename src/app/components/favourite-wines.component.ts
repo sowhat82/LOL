@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { count } from 'rxjs-compat/operator/count';
 import { AuthService } from '../auth.service';
 import { HttpService } from '../http.service';
@@ -15,10 +16,11 @@ export class FavouriteWinesComponent implements OnInit {
   favouriteWines: any
   countryCount: any = []
 
-  constructor(private auth: AuthService, private httpSvc: HttpService) { }
+  constructor(private auth: AuthService, private httpSvc: HttpService, private router: Router) { }
 
   async ngOnInit(): Promise<void> {
 
+    this.auth.lastVisitedPage = "/favouriteWines"
     this.userName = this.auth.userName
 
     this.favouriteWines = await this.httpSvc.getFavourites(this.userName)
@@ -33,6 +35,21 @@ export class FavouriteWinesComponent implements OnInit {
     this.favouriteWines = await this.httpSvc.getFavourites(this.userName)
 
     this.countryCount = await this.httpSvc.getCountryCount(this.userName)
+
+  }
+
+  async getWineDetails(wineID){
+
+    if (await this.auth.verifyToken() != 200){
+      window.alert ('Log in expired')
+      this.router.navigate(['/login'])
+      return
+    }
+
+    //store wineID in the wine service
+    this.httpSvc.wineID = wineID
+    console.info(wineID)
+    this.router.navigate(['/wineDetails'])
 
   }
 }

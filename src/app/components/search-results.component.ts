@@ -13,8 +13,6 @@ export class SearchResultsComponent implements OnInit {
   searchField = ""
   wineName = ""
   result: any = {}
-  OFFSET = 0
-  LIMIT = 10
   notstartofpage = false 
   notendofpage =  true
 
@@ -23,14 +21,16 @@ export class SearchResultsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
+    this.auth.lastVisitedPage = "/searchResults"
+
     this.searchField = this.httpSvc.searchField
     this.wineName = this.httpSvc.wineName
-    this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.OFFSET, this.LIMIT)
+    this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.auth.OFFSET, this.auth.LIMIT)
 
     console.info(this.result)
 
     // to show/hide buttons
-    this.notstartofpage = !(this.OFFSET==0)
+    this.notstartofpage = !(this.auth.OFFSET==0)
     this.notendofpage = !(this.result.items.length < 10)
   }
 
@@ -50,17 +50,17 @@ export class SearchResultsComponent implements OnInit {
   }
 
   async nextPage(){
-    this.OFFSET += this.LIMIT
-    this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.OFFSET, this.LIMIT)
+    this.auth.OFFSET += this.auth.LIMIT
+    this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.auth.OFFSET, this.auth.LIMIT)
 
-    this.notstartofpage = !(this.OFFSET==0)
+    this.notstartofpage = !(this.auth.OFFSET==0)
     this.notendofpage = !(this.result.items.length < 10)
   }
 
   async prevPage(){
-    this.OFFSET -= this.LIMIT
-    this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.OFFSET, this.LIMIT)
+    this.auth.OFFSET -= this.auth.LIMIT
+    this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.auth.OFFSET, this.auth.LIMIT)
 
-    this.notstartofpage = !(this.OFFSET==0)
+    this.notstartofpage = !(this.auth.OFFSET==0)
     this.notendofpage = !(this.result.items.length < 10)  }
 }

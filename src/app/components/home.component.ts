@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
     })
 
     this.userName = this.auth.userName
+    this.auth.OFFSET = 0
+
   }
 
   async search(textSearch){

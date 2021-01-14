@@ -61,4 +61,8 @@ export class WineDetailsComponent implements OnInit {
     }
   }
 
+  goBack(){
+    this.router.navigate([this.auth.lastVisitedPage])
+  }
+
 }

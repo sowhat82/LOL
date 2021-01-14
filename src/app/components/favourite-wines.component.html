@@ -16,7 +16,9 @@
             <img *ngIf = "f.digitalOceanKey !== 'undefined'" src="https://lol-bucket.ams3.digitaloceanspaces.com/{{f?.digitalOceanKey}}" class="img-thumbnail img-fluid" width="15%">
         </div>
         <div class="col-8">
-            <h3>{{ f.wineName }}</h3>    
+            <a (click) = "getWineDetails(f.wineID)" class="list-group-item list-group-item-action list-group-item-primary">      
+                <h3>{{ f.wineName }}</h3>    
+            </a>
             <button type="button" class="btn btn-danger" (click)="deleteSavedWine(f.ID)">Delete</button>    
         </div>
     </div>

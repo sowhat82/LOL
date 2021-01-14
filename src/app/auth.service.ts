@@ -7,6 +7,9 @@ export class AuthService {
 
     token: any
     userName = ""
+    lastVisitedPage = "/searchResults"
+    OFFSET = 0
+    LIMIT = 10
 
     constructor(private http: HttpClient){}
 
