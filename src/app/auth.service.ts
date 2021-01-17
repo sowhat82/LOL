@@ -71,4 +71,30 @@ export class AuthService {
 
     }
 
+    async createAccount(username: string, password:string){
+
+      var success = false
+
+      const loginDetails = new HttpParams()
+      .set('username', username)
+      .set('password', password);
+      
+      const  httpHeaders = new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded');
+      
+      await this.http.post('/createAccount', loginDetails.toString(),
+      { headers: httpHeaders, observe: 'response'})
+      .toPromise()
+      .then(
+        () => {
+          success = true
+        }
+      )
+      .catch((error) => {
+          window.alert("ERROR " + error.status)
+          success = false
+      })
+      return (success)
+  }
+
 }

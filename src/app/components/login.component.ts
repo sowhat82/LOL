@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   errorMessage = ""
   loginForm : FormGroup
+  createAccountForm: FormGroup
 
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private auth: AuthService) { }
 
@@ -24,6 +25,10 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [Validators.required]),
     })
 
+    this.createAccountForm = this.fb.group({
+      newUsername: this.fb.control('', [Validators.required]),
+      newPassword: this.fb.control('', [Validators.required]),
+    })
 
   }
 
@@ -32,8 +37,17 @@ export class LoginComponent implements OnInit {
     if (await this.auth.login(this.loginForm.get('username').value, this.loginForm.get('password').value)){
       this.router.navigate(['/home'])
     }
+  }
 
+  async createAccount(){
 
+    if (await this.auth.createAccount(this.loginForm.get('username').value, this.loginForm.get('password').value)){
+      window.alert('Account created! Please log in')
+    }
+    else{
+      window.alert('There was an error creating your account.')      
+    }
+    
   }
 
 }

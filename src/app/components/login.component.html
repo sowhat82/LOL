@@ -1,28 +1,75 @@
-<div class="row mt-2">
-	<div class="col">
-		<h2>Please Login</h2>
+<div class="container">
+	<div class="row">
+	  <div class="col-sm">
+	  </div>
+
+	  <!-- Middle section webpage -->
+	  <div class="col-sm">
+		<div class="row mt-2">
+			<div class="col">
+				<h2>Login</h2>
+			</div>
+		</div>
+
+		<form [formGroup] = "loginForm">
+			<div class="form-group col-sm-9">
+				<label for="title">Username</label>
+				<input formControlName = "username" id="title" class="form-control" type="text" placeholder="Username"
+						[ngClass]="{'is-invalid': errorMessage}">
+				<div class="invalid-feedback" *ngIf="errorMessage">
+					{{ errorMessage }}
+				</div>
+			</div>
+			<div class="form-group col-sm-9">
+				<label for="password">Password</label>
+				<input formControlName = "password" type="password" id="password" class="form-control" placeholder="Password"
+						[ngClass]="{'is-invalid': errorMessage}">
+			</div>
+
+			<div class="d-flex justify-content-end align-items-center mt-4">
+				<button [disabled] = "loginForm.invalid" class="btn btn-lg btn-success" (click) = "login()">
+					<span style="margin-right: 5px !important;">Login</span>
+					<i class="fas fa-door-open"></i>
+				</button>
+			</div>
+		</form>
+
+		<hr>
+		<div class = "text-center">OR</div>
+		<hr>
+
+		<!-- Create account -->
+		<div class="row mt-2">
+			<div class="col">
+				<h2>Create New Account</h2>
+			</div>
+		</div>
+
+		<form [formGroup] = "createAccountForm">
+			<div class="form-group col-sm-9">
+				<label for="title">Username</label>
+				<input formControlName = "newUsername" id="title" class="form-control" type="text" placeholder="Username">
+			</div>
+			<div class="form-group col-sm-9">
+				<label for="password">Password</label>
+				<input formControlName = "newPassword" type="password" id="password" class="form-control" placeholder="Password"
+						[ngClass]="{'is-invalid': errorMessage}">
+			</div>
+
+			<div class="d-flex justify-content-end align-items-center mt-4">
+				<button [disabled] = "createAccountForm.invalid" class="btn btn-lg btn-success" (click) = "createAccount()">
+					<span style="margin-right: 5px !important;">Create</span>
+					<i class="fas fa-door-open"></i>
+				</button>
+			</div>
+		</form>
+	</div>
+	  <!-- End of Middle section webpage -->
+
+	  <div class="col-sm">
+	  </div>
 	</div>
 </div>
 
-<form [formGroup] = "loginForm">
-	<div class="form-group">
-		<label for="title">Username</label>
-		<input formControlName = "username" id="title" class="form-control" type="text" placeholder="Username"
-				[ngClass]="{'is-invalid': errorMessage}">
-		<div class="invalid-feedback" *ngIf="errorMessage">
-			{{ errorMessage }}
-		</div>
-	</div>
-	<div class="form-group">
-		<label for="password">Password</label>
-		<input formControlName = "password" type="password" id="password" class="form-control" placeholder="Password"
-				[ngClass]="{'is-invalid': errorMessage}">
-	</div>
 
-	<div class="d-flex justify-content-end align-items-center mt-4">
-		<button [disabled] = "loginForm.invalid" class="btn btn-lg btn-success" (click) = "login()">
-			<span style="margin-right: 5px !important;">Login</span>
-			<i class="fas fa-door-open"></i>
-		</button>
-	</div>
-</form>
+	
