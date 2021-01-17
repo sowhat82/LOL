@@ -28,7 +28,7 @@
 
 			<div class="d-flex justify-content-end align-items-center mt-4">
 				<button [disabled] = "loginForm.invalid" class="btn btn-lg btn-success" (click) = "login()">
-					<span style="margin-right: 5px !important;">Login</span>
+					<span style="margin-right: 5px !important;">Login </span>
 					<i class="fas fa-door-open"></i>
 				</button>
 			</div>
@@ -48,18 +48,18 @@
 		<form [formGroup] = "createAccountForm">
 			<div class="form-group col-sm-9">
 				<label for="title">Username</label>
-				<input formControlName = "newUsername" id="title" class="form-control" type="text" placeholder="Username">
+				<input formControlName = "newUsername" id="newUsername" class="form-control" type="text" placeholder="Username">
 			</div>
 			<div class="form-group col-sm-9">
 				<label for="password">Password</label>
-				<input formControlName = "newPassword" type="password" id="password" class="form-control" placeholder="Password"
+				<input formControlName = "newPassword" type="password" id="newPassword" class="form-control" placeholder="Password"
 						[ngClass]="{'is-invalid': errorMessage}">
 			</div>
 
 			<div class="d-flex justify-content-end align-items-center mt-4">
 				<button [disabled] = "createAccountForm.invalid" class="btn btn-lg btn-success" (click) = "createAccount()">
-					<span style="margin-right: 5px !important;">Create</span>
-					<i class="fas fa-door-open"></i>
+					<span style="margin-right: 5px !important;">Create </span>
+					<i class="fas fa-plus-circle"></i>
 				</button>
 			</div>
 		</form>

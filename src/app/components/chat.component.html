@@ -1,37 +1,52 @@
-<h2>Private Messaging System (PMS)</h2>
-<h3>You are logged in as {{userName}}</h3>
+<div class="container">
+	<div class="row">
 
-<button type="button" class="btn btn-primary mx-2 ml-auto" (click) = "back()">Back</button>
-
-<form [formGroup] = "chatForm">
-  
-	<div class="d-flex justify-content-end align-items-center mt-4">
-		<button type="button" class="btn btn-lg btn-success" (click) = "conn()">
-			<span style="margin-right: 5px !important;" *ngIf = "!connected">Connect</span>
-			<span style="margin-right: 5px !important;" *ngIf = "connected">Disconnect</span>
-			<i class="fas fa-door-open"></i>
-		</button>
+		<div class="col">
+			<h2>Private Messaging System (PMS)</h2>
+			<h3>You are logged in as <span class = "text-success">{{userName}}</span></h3>
+		</div>
 	</div>
 
-  <div class="form-group">
-		<label for="password">Message</label>
-		<input formControlName = "message" type="message" id="message" class="form-control" placeholder="Message">
-	</div>
+	<div class="row">
+		<div class="col">
+			<div class="d-flex justify-content-end align-items-center mt-4">
+				<button type="button" class="btn btn-sm btn-success" (click) = "back()">
+					Back <i class="fas fa-backward"></i>
+				</button>
+			</div>
 
-	<div class="d-flex justify-content-end align-items-center mt-4">
-		<button type = "submit" [disabled] = "chatForm.get('message').value == '' || !connected" class="btn btn-lg btn-success" (click) = "send()">
-			<span style="margin-right: 5px !important;">Send</span>
-			<i class="fas fa-door-open"></i>
-		</button>
-	</div>
-</form>
+			<!-- <div class="d-flex justify-content align-items-center mt-4">
+				<button type="button" class="btn btn-sm btn-success" (click) = "conn()">
+					<span style="margin-right: 5px !important;" *ngIf = "!connected">Connect</span>
+					<span style="margin-right: 5px !important;" *ngIf = "connected">Disconnect</span>
+					<i class="fas fa-wifi"></i>
+				</button>
+			</div> -->
+		</div>
 
-<H3>	
+	</div>
+<hr>
+	<div class="row">
+		<form [formGroup] = "chatForm">
+			<div class="col">
+				<div class="form-group">
+					<input formControlName = "message" type="message" id="message" class="form-control" placeholder="Message">
+				</div>			
+				<div class="d-flex justify-content-end align-items-center mt-4">
+					<button type = "submit" [disabled] = "chatForm.get('message').value == '' || !connected" class="btn btn-sm btn-success" (click) = "send()">
+						<span style="margin-right: 5px !important;">Send </span>
+						<i class="fas fa-paper-plane"></i>
+					</button>
+				</div>
+			</div>
+		</form>
+</div>
+
+
+<H4>	
 	<label for="messages">Messages</label>
-</H3>
+</H4>
 <div *ngFor = "let m of messages">
-    <h5>
         <code>{{m.from}} </code>
         <span>{{m.message}}</span>    
-    </h5>
 </div>

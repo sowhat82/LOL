@@ -1,50 +1,86 @@
-<h2>Welcome {{userName}}!</h2>
+<div class="container">
 
-<div class="d-flex justify-content align-items-center mt-4">
+	<div class="row">
+		<div class="col">
+			<div class="d-flex justify-content-end align-items-center mt-4">
+					<span style="margin-right: 5px !important;"><h2>Welcome <span class = "text-success">{{userName}}</span>!</h2></span>
+			</div>
+			<div class="d-flex justify-content-end align-items-center mt-4">
+				<button class="btn btn-danger" [routerLink] = "['/favouriteWines']">
+					<span style="margin-right: 5px !important;">My Favourite Wines</span>
+					<i class="fas fa-heart"></i>
+				</button>
+			</div>
+			<div class="d-flex justify-content-end align-items-center mt-4">
+				<button class="btn btn-primary" [routerLink] = "['/chat']">
+					<span style="margin-right: 5px !important;">Join Chat Room </span>
+					<i class="fas fa-comments"></i>
+				</button>
+			</div>
+			<div class="d-flex justify-content-end align-items-center mt-4">
+				<a href="https://t.me/sowhat82_bot" target = "_blank">
+					<button class="btn btn-info">
+						<span style="margin-right: 5px !important;">Wine Bot </span>
+						<i class="fas fa-robot"></i>
+					</button>	
+				</a>
+			</div>
+		</div>
+	</div>
+
+<hr>
+
+	<div class="row">
+
+		<div class="col-9">
+			<form [formGroup] = "homeForm">
+				<div class="input-group mb-3">
+					<input formControlName = "search" id="search" class="form-control" type="text" placeholder="Search for Wines">
+					<div class="input-group-append">
+						<button [disabled] = "homeForm.invalid" class="btn btn-success" (click) = "search(true)">
+							<!-- <span style="margin-right: 5px !important;">Search</span> -->
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="col">
+
+			<label class="btn btn-danger" for="my-file-selector">
+				<input id="my-file-selector" type="file" class="d-none form-control" name = "imageFile" (change)="onFileSelect($event)">
+				<i class="fas fa-camera-retro"></i>
+			</label>
+			
+			<!-- <div>
+				<label for="formFileLg" class="form-label">Search by Image</label>
+				<input class="form-control form-control" id="formFileLg" type="file" name="imageFile" (change)="onFileSelect($event)">
+			</div>
+			<div class="d-flex justify-content-end align-items-center mt-4">
+				<div class="d-flex justify-content-end align-items-center mt-4">
+					<button [disabled] = "file == ''" class="btn btn-lg btn-success" (click) = "uploadImage()">
+						<span style="margin-right: 5px !important;">Image Search</span>
+						<i class="fas fa-door-open"></i>
+					</button>
+				</div>
+			</div>			 -->
+		</div>
+	</div>
+</div>
+
+
+<!-- <div class="d-flex justify-content align-items-center mt-4">
 	<button class="btn btn-lg btn-info" [routerLink] = "['/chat']">
 		<span style="margin-right: 5px !important;">Join Chat Room</span>
-		<i class="fas fa-door-open"></i>
+		<i class="fas fa-comments"></i>
 	</button>
 </div>
 
 <div class="d-flex justify-content-end align-items-center mt-4">
 	<button class="btn btn-lg btn-primary" [routerLink] = "['/favouriteWines']">
 		<span style="margin-right: 5px !important;">My Favourite Wines</span>
-		<i class="fas fa-door-open"></i>
+		<i class="fas fa-heart"></i>
 	</button>
-</div>
-<hr>
-
-<form [formGroup] = "homeForm">
-	<div class="form-group">
-		<label for="title">Search for Wines</label>
-		<input formControlName = "search" id="title" class="form-control" type="text" placeholder="Search for Wines">
-	</div>
-
-	<div class="d-flex justify-content-end align-items-center mt-4">
-		<button [disabled] = "homeForm.invalid" class="btn btn-lg btn-success" (click) = "search(true)">
-			<span style="margin-right: 5px !important;">Search</span>
-			<i class="fas fa-door-open"></i>
-		</button>
-	</div>
-</form>
-<br>
-	<!-- <div>
-		Search using an image =>
-		<input accept="image/*" class="form_control" type="file" name ="imageFile" (change)="onFileSelect($event)"/>
-	</div> -->
-
-	<div>
-		<label for="formFileLg" class="form-label">Search by Image</label>
-		<input class="form-control form-control" id="formFileLg" type="file" name="imageFile" (change)="onFileSelect($event)">
-	</div>
-
-<div class="d-flex justify-content-end align-items-center mt-4">
-	<div class="d-flex justify-content-end align-items-center mt-4">
-		<button [disabled] = "file == ''" class="btn btn-lg btn-success" (click) = "uploadImage()">
-			<span style="margin-right: 5px !important;">Image Search</span>
-			<i class="fas fa-door-open"></i>
-		</button>
-	</div>
-</div>
+</div> -->
 

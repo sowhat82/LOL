@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   async createAccount(){
 
-    if (await this.auth.createAccount(this.loginForm.get('username').value, this.loginForm.get('password').value)){
+    if (await this.auth.createAccount(this.createAccountForm.get('newUsername').value, this.createAccountForm.get('newPassword').value)){
       window.alert('Account created! Please log in')
     }
     else{

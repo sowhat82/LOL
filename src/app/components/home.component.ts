@@ -50,6 +50,8 @@ export class HomeComponent implements OnInit {
       this.file = event.target.files[0];
     }
 
+    this.uploadImage()
+
   }
 
   async uploadImage(){
