@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 
@@ -23,8 +24,9 @@ export class AuthService {
         
         const  httpHeaders = new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded');
-        
-        await this.http.post('/login', loginDetails.toString(),
+
+        console.info(environment.herokuUrl+'/login')
+        await this.http.post(environment.herokuUrl+'/login', loginDetails.toString(),
         { headers: httpHeaders, observe: 'response'})
         .toPromise()
         .then(
@@ -53,7 +55,7 @@ export class AuthService {
       const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.token.token}`)
 
-      await this.http.get<any>('/protected/secret', {headers: headers, observe: 'response'}).toPromise().then(
+      await this.http.get<any>(environment.herokuUrl+'/protected/secret', {headers: headers, observe: 'response'}).toPromise().then(
         function(result) {
           // success callback
           status = result.status
@@ -80,7 +82,7 @@ export class AuthService {
       const  httpHeaders = new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded');
       
-      await this.http.post('/createAccount', loginDetails.toString(),
+      await this.http.post(environment.herokuUrl+'/createAccount', loginDetails.toString(),
       { headers: httpHeaders, observe: 'response'})
       .toPromise()
       .then(

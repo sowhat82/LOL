@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { HttpService } from '../http.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -49,7 +50,7 @@ export class WineDetailsComponent implements OnInit {
 			.set('country', this.httpSvc.country)
 			.set('wineName', this.httpSvc.wineName + " " + this.httpSvc.wineVarietal)
 
-      await this.http.post<any>('/saveWine', formData, {params: params}).toPromise()  
+      await this.http.post<any>(environment.herokuUrl+'/saveWine', formData, {params: params}).toPromise()  
     
     // this.httpSvc.saveWine(this.auth.userName, this.httpSvc.wineID, this.httpSvc.wineName + " " + this.httpSvc.wineVarietal, digitalOceanKey.key)
     window.alert('Saved!')

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { AuthService } from "./auth.service";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 
@@ -24,23 +25,23 @@ export class HttpService {
         .set('offset', OFFSET)
         .set('limit', LIMIT)
 
-        const results = await this.http.get<any>(`/searchResults`, {params: params}).toPromise()
+        const results = await this.http.get<any>(environment.herokuUrl+`/searchResults`, {params: params}).toPromise()
         return results
     }
 
     async getWineDetails(wineID) {
-        const results = await this.http.get<any>('/getWineDetails/'+wineID).toPromise()
+        const results = await this.http.get<any>(environment.herokuUrl+'/getWineDetails/'+wineID).toPromise()
         return results
     }
 
     async getFavourites(userName){
-      this.favourites = await this.http.get<any>('/favourites/'+userName).toPromise() 
+      this.favourites = await this.http.get<any>(environment.herokuUrl+'/favourites/'+userName).toPromise() 
       console.info(this.favourites)
       return (this.favourites)
     }
 
     async getCountryCount(userName){
-      const countryCount = await this.http.get<any>('/countryCount/'+userName).toPromise() 
+      const countryCount = await this.http.get<any>(environment.herokuUrl+'/countryCount/'+userName).toPromise() 
       console.info(countryCount)
       return (countryCount)
     }
@@ -52,7 +53,7 @@ export class HttpService {
         const httpHeaders = new HttpHeaders()
         .set('Content-Type', 'application/x-www-form-urlencoded')
         console.info(params)
-        await this.http.post('/deleteSavedWine', params.toString(), {headers: httpHeaders}).toPromise().then(
+        await this.http.post(environment.herokuUrl+'/deleteSavedWine', params.toString(), {headers: httpHeaders}).toPromise().then(
           function() {
             // success callback
           },

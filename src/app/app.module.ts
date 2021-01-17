@@ -13,6 +13,8 @@ import { WineDetailsComponent } from './components/wine-details.component';
 import { FavouriteWinesComponent } from './components/favourite-wines.component';
 import { ChatComponent } from './components/chat.component';
 import { ChatService } from './chat.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const ROUTES: Routes = [
 	{ path: '', component: LoginComponent },
@@ -37,7 +39,7 @@ const ROUTES: Routes = [
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }), RouterModule.forRoot(ROUTES, {
     initialNavigation: 'enabled'
-}), FormsModule, ReactiveFormsModule, HttpClientModule
+}), FormsModule, ReactiveFormsModule, HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthService, HttpService, ChatService],
   bootstrap: [AppComponent]

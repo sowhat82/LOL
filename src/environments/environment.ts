@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'ws://localhost:3000'
+  baseUrl: 'ws://localhost:3000',
+  herokuUrl: ''
 };
 
 /*

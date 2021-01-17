@@ -23,10 +23,7 @@ export class ChatService{
 
     join(name: string){
 
-        console.info(name)
-
         const params = new HttpParams().set('name', name)
-
 
         // set ws protocol when using http and wss when using https
         const protocol = window.location.protocol.replace('http', 'ws');

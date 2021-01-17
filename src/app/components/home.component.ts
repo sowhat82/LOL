@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { logWarnings } from 'protractor/built/driverProviders';
+import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth.service';
 import { HttpService } from '../http.service';
 
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
     formData.set('name', 'temp pic for recognition');
     formData.set('image-file', this.file);
 
-    const result = await this.http.post<any>('/uploadPictureRecognition', formData).toPromise()  
+    const result = await this.http.post<any>(environment.herokuUrl+'/uploadPictureRecognition', formData).toPromise()  
 
     if (result.type == 'google'){
       // google image recognition handling
