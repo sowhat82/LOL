@@ -48,7 +48,6 @@ export class FavouriteWinesComponent implements OnInit {
 
     //store wineID in the wine service
     this.httpSvc.wineID = wineID
-    console.info(wineID)
     this.router.navigate(['/wineDetails'])
 
   }

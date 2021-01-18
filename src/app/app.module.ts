@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, platformBrowser } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -37,9 +37,10 @@ const ROUTES: Routes = [
     ChatComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }), RouterModule.forRoot(ROUTES, {
-    initialNavigation: 'enabled'
-}), FormsModule, ReactiveFormsModule, HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    BrowserModule.withServerTransition({ appId: 'serverApp' }), 
+    RouterModule.forRoot(ROUTES, {initialNavigation: 'enabled'}), 
+    FormsModule, ReactiveFormsModule, HttpClientModule, 
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [AuthService, HttpService, ChatService],
   bootstrap: [AppComponent]

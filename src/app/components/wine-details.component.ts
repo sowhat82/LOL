@@ -5,7 +5,7 @@ import { AuthService } from '../auth.service';
 import { HttpService } from '../http.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-wine-details',
@@ -21,7 +21,7 @@ export class WineDetailsComponent implements OnInit {
 
   file = ""
 
-  constructor(private httpSvc: HttpService, private router: Router, private auth: AuthService, private http: HttpClient) { }
+  constructor(private sanitizer: DomSanitizer, private httpSvc: HttpService, private router: Router, private auth: AuthService, private http: HttpClient) {}
 
   async ngOnInit(): Promise<void> {
 
@@ -59,11 +59,17 @@ export class WineDetailsComponent implements OnInit {
   onFileSelect(event) {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
+      window.alert('Image uploaded!')
     }
   }
 
   goBack(){
     this.router.navigate([this.auth.lastVisitedPage])
+  }
+
+  photoURL() {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(
+      "https://quiniwine.com/api/pub/wineReviews?mode=e&wine_id="+this.result?.aggregate?.wine?.id);
   }
 
 }
