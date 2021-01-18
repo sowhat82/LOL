@@ -33,13 +33,11 @@ export class HomeComponent implements OnInit {
 
   async search(textSearch){
 
-    // console.info(await this.auth.verifyToken())
-
-    if (await this.auth.verifyToken() != 200){
-      window.alert ('Log in expired')
-      this.router.navigate(['/login'])
-      return
-    }
+    // if (await this.auth.verifyToken() != 200){
+    //   window.alert ('Log in expired')
+    //   this.router.navigate(['/login'])
+    //   return
+    // }
     if (textSearch){
       this.httpSvc.searchField = this.homeForm.get('search').value
     }
@@ -52,7 +50,6 @@ export class HomeComponent implements OnInit {
     }
 
     this.uploadImage()
-
   }
 
   async uploadImage(){
@@ -69,7 +66,6 @@ export class HomeComponent implements OnInit {
       // google image recognition handling
       searchText = await (result?.response.description.replace(/[\W_]+/g," ").replace(/\r?\n|\r/," "))
       searchText = searchText.trim()
-      console.info(searchText)
       this.httpSvc.searchField = searchText
     }
     else{
@@ -88,8 +84,8 @@ export class HomeComponent implements OnInit {
       this.httpSvc.searchField = uniqueSearchText
     }
 
-
-    
+    this.homeForm.reset()
+    this.search(false)
 
     // OR IBM image recognition if google image fails
     // if (searchText == undefined){
@@ -108,7 +104,6 @@ export class HomeComponent implements OnInit {
 
     // this.httpSvc.searchField = uniqueSearchText
 
-    this.homeForm.reset()
-    this.search(false)
+
   }
 }
