@@ -73,6 +73,7 @@ export class AuthService {
 
     async createAccount(username: string, password:string){
 
+
       var success = false
 
       const loginDetails = new HttpParams()
@@ -91,7 +92,7 @@ export class AuthService {
         }
       )
       .catch((error) => {
-          window.alert("ERROR " + error.status)
+          window.alert("Username already exists. Please try another. Error Code: " + error.status)
           success = false
       })
       return (success)
