@@ -7,5 +7,5 @@ const host = "list-of-liquors.herokuapp.com"
 export const environment = {
   production: true,
   baseUrl: `${protocol}//${host}`,
-  herokuUrl: 'https://list-of-liquors.herokuapp.com'
+  herokuUrl: 'https://cors-anywhere.herokuapp.com/https://list-of-liquors.herokuapp.com'
 };
