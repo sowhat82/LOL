@@ -16,6 +16,7 @@ import { ChatService } from './chat.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NavBarComponent } from './components/nav-bar.component';
+import { BrowseWinesComponent } from './components/browse-wines.component';
 
 const ROUTES: Routes = [
 	{ path: '', component: LoginComponent },
@@ -36,7 +37,8 @@ const ROUTES: Routes = [
     WineDetailsComponent,
     FavouriteWinesComponent,
     ChatComponent,
-    NavBarComponent
+    NavBarComponent,
+    BrowseWinesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }), 

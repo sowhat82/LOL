@@ -21,3 +21,14 @@
     cursor: inherit;
     display: block;
 }
+
+.center-cropped {
+    object-fit: cover; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    height: 130px;
+    width: 130px;
+  }
+
+  img {
+    opacity: 0.5;
+  }
