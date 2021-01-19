@@ -12,11 +12,11 @@ import { ChatMessage, ChatService } from '../chat.service';
 })
 export class ChatComponent implements OnInit {
 
-  connected = false;
   chatForm : FormGroup
   messages: ChatMessage[] = []
   event$: Subscription
   userName = ""
+  connected = false
 
 
   constructor(private fb: FormBuilder, private chatSvc: ChatService, private auth: AuthService, private router: Router) { }
@@ -28,22 +28,30 @@ export class ChatComponent implements OnInit {
     })    
 
     this.userName = this.auth.userName
+    this.connected = this.chatSvc.connected
+    // this.conn()
+    this.messages = this.chatSvc.messages
 
-    this.conn()
+    this.event$ = this.chatSvc.event.subscribe(
+      (chat) => {
+        // this.chatSvc.messages.unshift(chat)
+        this.messages = this.chatSvc.messages
+      }
+    )
   }
 
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    if (this.event$ != null){
-      this.event$.unsubscribe()
-      this.event$ = null
-    }
+    // if (this.event$ != null){
+    //   this.event$.unsubscribe()
+    //   this.event$ = null
+    // }
   }
       
   async conn(){
     
-    if (this.connected){
+    if (this.chatSvc.connected){
       this.chatSvc.leave()
       await this.chatSvc.delay(1000)
       this.event$.unsubscribe()
@@ -53,11 +61,13 @@ export class ChatComponent implements OnInit {
       this.chatSvc.join(this.auth.userName)
       this.event$ = this.chatSvc.event.subscribe(
         (chat) => {
-          this.messages.unshift(chat)
+          // this.chatSvc.messages.unshift(chat)
+          this.messages = this.chatSvc.messages
         }
       )
     }
-    this.connected = !this.connected
+    this.chatSvc.connected = !this.chatSvc.connected
+    this.connected = this.chatSvc.connected
   }
 
   send(){
@@ -68,7 +78,7 @@ export class ChatComponent implements OnInit {
 
   async back(){
     
-    if (this.connected){
+    if (this.chatSvc.connected){
       this.chatSvc.leave()
       await this.chatSvc.delay(1000)
       this.event$.unsubscribe()

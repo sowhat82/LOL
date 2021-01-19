@@ -16,9 +16,10 @@ export class ChatService{
     delay(ms: number) {
         return new Promise( resolve => setTimeout(resolve, ms) );
       }
-    
-    private sock: WebSocket = null
 
+    messages: ChatMessage[] = []
+    connected = false
+    private sock: WebSocket = null
     event = new Subject<ChatMessage>()
 
     join(name: string){
@@ -36,6 +37,7 @@ export class ChatService{
 
         this.sock.onmessage = (payload: MessageEvent) => {
             const chat = JSON.parse(payload.data) as ChatMessage
+            this.messages.unshift(chat)
             this.event.next(chat)
         }
 
@@ -51,6 +53,7 @@ export class ChatService{
     async leave(){
 
         this.sock.send('has left the building :(')
+
         await this.delay(1000)
         if (this.sock != null){
             this.sock.close()
