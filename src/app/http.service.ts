@@ -13,6 +13,8 @@ export class HttpService {
     wineID = ""
     country=""
     favourites = []
+    category = ""
+    categoryCode = ""
     constructor (private http: HttpClient, private auth: AuthService){}
 
     async searchWines(searchField, OFFSET, LIMIT){
@@ -63,6 +65,14 @@ export class HttpService {
             window.alert(response.error.message)
           })
     
+    }
+
+    async getWineByCategory(categoryCode){
+      const params = new HttpParams()
+      .set('categoryCode', categoryCode)
+
+      const results = await this.http.get<any>(environment.herokuUrl+`/wineByCategory`, {params: params}).toPromise()
+      return results
     }
 
 }

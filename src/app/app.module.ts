@@ -25,6 +25,7 @@ const ROUTES: Routes = [
 	{ path: 'wineDetails', component: WineDetailsComponent },
 	{ path: 'favouriteWines', component: FavouriteWinesComponent },
 	{ path: 'chat', component: ChatComponent },
+	{ path: 'browseWines', component: BrowseWinesComponent },
 	{ path: '**', redirectTo: '/', pathMatch: 'full' }
 ]
 

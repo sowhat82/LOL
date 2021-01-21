@@ -103,7 +103,12 @@ export class HomeComponent implements OnInit {
     // }).join(' ');
 
     // this.httpSvc.searchField = uniqueSearchText
+  }
 
+  browseWines(category: string, categoryCode: string){
 
+    this.httpSvc.category = category
+    this.httpSvc.categoryCode = categoryCode
+    this.router.navigate(['/browseWines'])
   }
 }

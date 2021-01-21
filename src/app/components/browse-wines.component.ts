@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-browse-wines',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrowseWinesComponent implements OnInit {
 
-  constructor() { }
+  result: any
+  category = ""
 
-  ngOnInit(): void {
+  constructor(private httpSvc: HttpService, private router: Router) { }
+
+  async ngOnInit(): Promise<void> {
+
+    this.category = this.httpSvc.category
+    this.result = await this.httpSvc.getWineByCategory(this.httpSvc.categoryCode)
+    console.info(this.result)
+  }
+
+  async getWineDetails(wineID){
+
+    //store wineID in the wine service
+    this.httpSvc.wineID = wineID
+    this.router.navigate(['/wineDetails'])
+
   }
 
 }

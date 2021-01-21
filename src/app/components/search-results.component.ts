@@ -27,8 +27,6 @@ export class SearchResultsComponent implements OnInit {
     this.wineName = this.httpSvc.wineName
     this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.auth.OFFSET, this.auth.LIMIT)
 
-    console.info(this.result)
-
     // to show/hide buttons
     this.notstartofpage = !(this.auth.OFFSET==0)
     this.notendofpage = !(this.result.items.length < 10)

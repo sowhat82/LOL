@@ -1,1 +1,43 @@
-<p>browse-wines works!</p>
+<app-nav-bar></app-nav-bar>
+<div class="container">
+
+    <div class="row">
+      <div class="col">
+        <h3><span class = "text-success">{{category}}</span></h3>
+      </div>
+      <!-- <div class="col">
+        <div class="d-flex justify-content-end align-items-center mt-4">
+  
+          <button type="button" class="btn btn-success mx-2 ml-auto" [routerLink] = "['/home']">
+            Back <i class="fas fa-backward"></i>
+          </button>
+        </div>
+      </div> -->
+    </div>
+  
+    <div class="row">
+          <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Country</th>
+              <th scope="col">Vintage</th>
+              <th scope="col">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor = "let r of result?.items">
+                <a (click) = "getWineDetails(r.id)" class="list-group-item list-group-item-action list-group-item-primary">      
+                    <td>{{r.nameClean}}</td>
+                </a>
+                <td>{{r.Country}}</td>
+                <td>{{r.vintage}}</td>
+                <td>{{r.Type}}</td>
+            </tr>
+          </tbody>
+        </table>      
+    </div>
+  </div>
+  
+  
+  
