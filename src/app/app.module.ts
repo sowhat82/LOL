@@ -17,6 +17,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NavBarComponent } from './components/nav-bar.component';
 import { BrowseWinesComponent } from './components/browse-wines.component';
+import { TasteReviewComponent } from './components/taste-review.component';
 
 const ROUTES: Routes = [
 	{ path: '', component: LoginComponent },
@@ -26,6 +27,7 @@ const ROUTES: Routes = [
 	{ path: 'favouriteWines', component: FavouriteWinesComponent },
 	{ path: 'chat', component: ChatComponent },
 	{ path: 'browseWines', component: BrowseWinesComponent },
+	{ path: 'tasteReview', component: TasteReviewComponent },
 	{ path: '**', redirectTo: '/', pathMatch: 'full' }
 ]
 
@@ -39,7 +41,8 @@ const ROUTES: Routes = [
     FavouriteWinesComponent,
     ChatComponent,
     NavBarComponent,
-    BrowseWinesComponent
+    BrowseWinesComponent,
+    TasteReviewComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }), 

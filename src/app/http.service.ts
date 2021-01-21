@@ -75,4 +75,8 @@ export class HttpService {
       return results
     }
 
+    submitTasteReview(wineID){
+      
+    }
+
 }

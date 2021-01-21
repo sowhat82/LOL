@@ -72,4 +72,9 @@ export class WineDetailsComponent implements OnInit {
       "https://quiniwine.com/api/pub/wineReviews?mode=e&wine_id="+this.result?.aggregate?.wine?.id);
   }
 
+  submitTasteReview(){
+    console.info('navigate to taste review')
+    this.router.navigate(['/tasteReview'])
+  }
+
 }
