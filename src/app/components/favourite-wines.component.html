@@ -20,7 +20,20 @@
 
     <div *ngFor = "let f of favouriteWines">
         <div class="row">
-            <div class="col-7">
+            <div class="col-3 my-auto">
+
+                <a href="https://lol-bucket.ams3.digitaloceanspaces.com/{{f?.digitalOceanKey}}" target="__blank">
+                    <img *ngIf = "f.digitalOceanKey !== null" 
+                    src="https://lol-bucket.ams3.digitaloceanspaces.com/{{f?.digitalOceanKey}}" 
+                    class="img-thumbnail img-fluid" width="100%">
+                </a>
+
+                <a *ngIf = "f.digitalOceanKey == null" href={{f.image?.url}} target="__blank">
+                    <img src={{f.image?.url}} class="img-thumbnail img-fluid" width="100%">
+                </a>
+            </div>
+
+            <div class="col">
                 <div class="row">
                         <a (click) = "getWineDetails(f.wineID)" class="list-group-item list-group-item-action list-group-item-primary">      
                             {{ f.wineName }}
@@ -31,9 +44,6 @@
                     <button type="button" class="btn btn-danger" (click)="deleteSavedWine(f.ID)">Delete</button>    
                 </div>
             </div> 
-            <div class="col">
-                    <img *ngIf = "f.digitalOceanKey !== 'undefined'" src="https://lol-bucket.ams3.digitaloceanspaces.com/{{f?.digitalOceanKey}}" class="img-thumbnail img-fluid" width="50%">
-            </div>
         </div>
         <hr>
     </div>

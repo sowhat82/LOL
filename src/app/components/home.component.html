@@ -23,11 +23,11 @@
 	<div class="row">
 
 		<div class="col-9">
-			<form [formGroup] = "homeForm">
+			<form [formGroup] = "homeForm" (ngSubmit)="search(true)">
 				<div class="input-group mb-3">
 					<input formControlName = "search" id="search" class="form-control" type="text" placeholder="Search for Wines">
 					<div class="input-group-append">
-						<button [disabled] = "homeForm.invalid" class="btn btn-success" (click) = "search(true)">
+						<button type = "button" [disabled] = "homeForm.invalid" class="btn btn-success" (click) = "search(true)">
 							<!-- <span style="margin-right: 5px !important;">Search</span> -->
 							<i class="fas fa-search"></i>
 						</button>

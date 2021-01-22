@@ -14,6 +14,7 @@ export class FavouriteWinesComponent implements OnInit {
 
   userName = ""
   favouriteWines: any
+  imageResult: any
   countryCount: any = []
 
   constructor(private auth: AuthService, private httpSvc: HttpService, private router: Router) { }
@@ -23,18 +24,31 @@ export class FavouriteWinesComponent implements OnInit {
     this.auth.lastVisitedPage = "/favouriteWines"
     this.userName = this.auth.userName
 
-    this.favouriteWines = await this.httpSvc.getFavourites(this.userName)
-
     this.countryCount = await this.httpSvc.getCountryCount(this.userName)
+
+    this.favouriteWines = await this.httpSvc.getFavourites(this.userName)
+    for (let i = 0; i < this.favouriteWines.length; i++){
+      if(this.favouriteWines[i].digitalOceanKey == null){
+        this.imageResult = await this.httpSvc.getImages(this.favouriteWines[i].wineName)
+        this.favouriteWines[i].image = this.imageResult[0]  
+      }
+    }
+
   }
 
   async deleteSavedWine(ID){
-    console.info(ID)
     await this.httpSvc.deleteSavedWine(ID)
 
-    this.favouriteWines = await this.httpSvc.getFavourites(this.userName)
-
     this.countryCount = await this.httpSvc.getCountryCount(this.userName)
+
+    this.favouriteWines = await this.httpSvc.getFavourites(this.userName)
+    for (let i = 0; i < this.favouriteWines.length; i++){
+      if(this.favouriteWines[i].digitalOceanKey == null){
+        this.imageResult = await this.httpSvc.getImages(this.favouriteWines[i].wineName)
+        this.favouriteWines[i].image = this.imageResult[0]  
+      }
+    }
+
 
   }
 

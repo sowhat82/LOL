@@ -21,12 +21,13 @@ export class WineDetailsComponent implements OnInit {
 
   file = ""
 
-  constructor(private sanitizer: DomSanitizer, private httpSvc: HttpService, private router: Router, private auth: AuthService, private http: HttpClient) {}
+  constructor(private sanitizer: DomSanitizer, private httpSvc: HttpService, private router: Router, 
+    private auth: AuthService, private http: HttpClient) {}
 
   async ngOnInit(): Promise<void> {
 
     this.result = await this.httpSvc.getWineDetails(this.httpSvc.wineID)
-    console.info(this.result)
+    console.info('wine details init: ', this.result)
     this.httpSvc.wineName = this.result.aggregate?.wine.Name
     this.httpSvc.wineVarietal = this.result.aggregate?.wine.Varietal
     this.httpSvc.country = this.result.aggregate?.wine.Country
@@ -34,7 +35,6 @@ export class WineDetailsComponent implements OnInit {
     this.emptyWineName = Object.keys(this.result).length === 0
     this.emptyCountry = Object.keys(this.result).length === 0
     this.emptyDescription = Object.keys(this.result).length === 0
-    // console.info(Object.keys(this.result).length === 0)    
   }
 
   async addToFavourites(){
@@ -59,7 +59,7 @@ export class WineDetailsComponent implements OnInit {
   onFileSelect(event) {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
-      window.alert('Image uploaded!')
+      window.alert('Image uploaded! Click "Add to favourites".')
     }
   }
 

@@ -15,7 +15,28 @@
       </div> -->
     </div>
   
-    <div class="row">
+    <div *ngFor = "let r of result?.items" class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-2 my-auto">
+            <a href={{r.image?.url}} target="__blank">
+            <img src={{r.image?.url}} alt="..." width = 100%>
+            </a> 
+          </div>
+          <div class="col">
+            <div class="card-body">
+              <a (click) = "getWineDetails(r.id)" class="list-group-item list-group-item-action list-group-item-primary">      
+              <h6 class="card-title mb-0">{{r.nameClean}}</h6>
+              <h6 class="card-text mb-0 text-muted ms-1">Country: {{r.Country}}</h6>
+              <h6 class="card-text mb-0 text-muted ms-1">Vintage: {{r.vintage}}</h6>
+              <h6 class="card-text mb-0 text-muted ms-1">Type: {{r.Type}}</h6>
+              </a>
+          </div>
+          </div>
+        </div>
+    </div>
+</div>
+  
+    <!-- <div class="row">
           <table class="table">
           <thead>
             <tr>
@@ -36,8 +57,7 @@
             </tr>
           </tbody>
         </table>      
-    </div>
-  </div>
+    </div> -->
   
   
   

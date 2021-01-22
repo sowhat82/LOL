@@ -31,7 +31,15 @@ export class HttpService {
         return results
     }
 
+    async getImages(wineName){
+      const params = new HttpParams()
+      .set('wineName', wineName)
+    const results = await this.http.get<any>(environment.herokuUrl+`/imageSearch`, {params: params}).toPromise()
+      return results
+    }
+
     async getWineDetails(wineID) {
+      
         const results = await this.http.get<any>(environment.herokuUrl+'/getWineDetails/'+wineID).toPromise()
         return results
     }
@@ -73,10 +81,6 @@ export class HttpService {
 
       const results = await this.http.get<any>(environment.herokuUrl+`/wineByCategory`, {params: params}).toPromise()
       return results
-    }
-
-    submitTasteReview(wineID){
-      
     }
 
 }

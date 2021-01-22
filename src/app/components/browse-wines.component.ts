@@ -10,6 +10,7 @@ import { HttpService } from '../http.service';
 export class BrowseWinesComponent implements OnInit {
 
   result: any
+  imageResult: any
   category = ""
 
   constructor(private httpSvc: HttpService, private router: Router) { }
@@ -18,7 +19,11 @@ export class BrowseWinesComponent implements OnInit {
 
     this.category = this.httpSvc.category
     this.result = await this.httpSvc.getWineByCategory(this.httpSvc.categoryCode)
-    console.info(this.result)
+    for (let i = 0; i < this.result.items.length; i++){
+      this.imageResult = await this.httpSvc.getImages(this.result.items[i].Name +' '+ this.result.items[i].Varietal)
+      this.result.items[i].image = this.imageResult[0]
+    }
+
   }
 
   async getWineDetails(wineID){

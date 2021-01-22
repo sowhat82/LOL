@@ -13,6 +13,7 @@ export class SearchResultsComponent implements OnInit {
   searchField = ""
   wineName = ""
   result: any = {}
+  imageResult: any = {}
   notstartofpage = false 
   notendofpage =  true
 
@@ -26,6 +27,11 @@ export class SearchResultsComponent implements OnInit {
     this.searchField = this.httpSvc.searchField
     this.wineName = this.httpSvc.wineName
     this.result = await this.httpSvc.searchWines(this.httpSvc.searchField, this.auth.OFFSET, this.auth.LIMIT)
+    for (let i = 0; i < this.result.items.length; i++){
+      this.imageResult = await this.httpSvc.getImages(this.result.items[i].Name +' '+ this.result.items[i].Varietal)
+      this.result.items[i].image = this.imageResult[0]
+    }
+
 
     // to show/hide buttons
     this.notstartofpage = !(this.auth.OFFSET==0)
