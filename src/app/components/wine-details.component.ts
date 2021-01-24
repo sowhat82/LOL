@@ -77,4 +77,8 @@ export class WineDetailsComponent implements OnInit {
     this.router.navigate(['/tasteReview'])
   }
 
+  moreWinesFromWinery(winery: string){
+    this.httpSvc.searchField = winery
+    this.router.navigate(['/searchResults'])
+  }
 }
